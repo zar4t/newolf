@@ -1,0 +1,11 @@
+# Segredos e chaves
+.env
+*.pem
+*.key
+
+# Arquivos de build e cache
+__pycache__/
+*.pyc
+dist/
+build/
+*.egg-info/
