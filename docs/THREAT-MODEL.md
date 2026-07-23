@@ -125,3 +125,19 @@ the interface shows
 - Never trust role or permission fields sent by the client
 - Apply least privilege — every user gets only what they need, nothing more
 - Log all administrative actions and alert on unusual patterns
+
+## 3. Attack Trees
+
+### Goal: Access another tenant's secret
+
+Acessar segredo de outro tenant (OR)
+├── Caminho 1: Spoofing (OR)
+│ ├── Usar credencial roubada de usuário legítimo
+│ └── Usar token de autenticação comprometido
+└── Caminho 2: Information Disclosure - IDOR (OR)
+├── Alterar o identificador (ID) do segredo na requisição
+└── Explorar ausência de verificação de ownership na API
+
+Both paths lead to the same outcome: unauthorized access to another
+tenant's secrets. Closing one path is not enough both must be addressed
+independently.
