@@ -10,7 +10,10 @@
 ## Table of Contents
 
 - [Project Description](#project-description)
+- [Current Status](#current-status)
 - [Security Model](#security-model)
+- [Architecture](#architecture)
+- [Architecture Decisions](#architecture-decisions)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Roadmap](#roadmap)
@@ -35,6 +38,22 @@ The project demonstrates:
 - Infrastructure as Code with security scanning
 - CI/CD pipelines with integrated security gates
 
+## Current Status
+
+Newolf is in its foundational phase. Security design comes first: the threat
+model, project charter and purple team rules are complete and committed before
+any production code is written.
+
+| Area | State |
+|---|---|
+| Threat model (STRIDE, PASTA, Attack Trees) | Complete |
+| Project charter and scope | Complete |
+| Purple team charter and lab rules | Complete |
+| Architecture decision records | In progress |
+| API implementation | Not started |
+| Infrastructure as Code | Not started |
+| CI/CD pipeline | Not started |
+
 ## Security Model
 
 Security is designed before code, not added after. The current threat model
@@ -48,6 +67,56 @@ covers six STRIDE categories and two full attack scenarios, documented in
 | **Defense in depth** | Multiple independent layers, no single point of failure |
 | **Auditability** | Every sensitive action is logged and attributable |
 | **Zero trust** | Authorization enforced server-side on every request |
+
+## Architecture
+
+The core flow of a request to store a secret, as decomposed during threat
+modeling. Every step exists for a reason and maps to a specific threat.
+```
+Client
+│
+▼
+[1] API receives the request
+│
+▼
+[2] Authentication ── who is this?
+│
+▼
+[3] Authorization ── are they allowed to do this?
+│
+▼
+[4] Input validation ── is the payload well-formed?
+│
+▼
+[5] Encryption ── secret is encrypted before storage
+│
+▼
+[6] Tenant binding ── secret is tied to the correct tenant
+│
+▼
+[7] Persistence ── written to secure storage
+│
+▼
+[8] Audit log ── who did what, and when
+│
+▼
+[9] Response to client
+```
+
+Steps 2 and 3 form the trust boundary: before them, a request is untrusted;
+after them, it carries a verified identity and a defined set of permissions.
+
+Detailed diagrams and design notes live in [`docs/architecture/`](docs/architecture/).
+
+## Architecture Decisions
+
+Significant design decisions are recorded as ADRs (Architecture Decision
+Records) in [`docs/architecture/adr/`](docs/architecture/adr/). Each record
+captures the context, the decision itself and its consequences.
+
+| ADR | Decision |
+|---|---|
+| [0001](docs/architecture/adr/0001-threat-model-before-code.md) | Threat model before writing code |
 
 ## Tech Stack
 
