@@ -63,6 +63,7 @@ covers six STRIDE categories and two full attack scenarios, documented in
 
 ## Project Structure
 
+```
 newolf/
 ├── src/ # Application source code
 │ ├── api/ # API endpoints and routing
@@ -88,6 +89,7 @@ newolf/
 ├── .github/workflows/ # CI/CD pipelines
 ├── .gitignore # Git ignore rules
 └── LICENSE # MIT License
+```
 
 ## Roadmap
 
