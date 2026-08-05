@@ -136,13 +136,15 @@ the interface shows
 
 ### Goal: Access another tenant's secret
 
-Acessar segredo de outro tenant (OR)
-├── Caminho 1: Spoofing (OR)
-│ ├── Usar credencial roubada de usuário legítimo
-│ └── Usar token de autenticação comprometido
-└── Caminho 2: Information Disclosure - IDOR (OR)
-├── Alterar o identificador (ID) do segredo na requisição
-└── Explorar ausência de verificação de ownership na API
+```
+Access another tenant's secret (OR)
+├── Path 1: Spoofing (OR)
+│   ├── Use a legitimate user's stolen credential
+│   └── Use a compromised authentication token
+└── Path 2: Information Disclosure - IDOR (OR)
+    ├── Change the secret identifier (ID) in the request
+    └── Exploit missing ownership verification in the API
+```
 
 Both paths lead to the same outcome: unauthorized access to another
 tenant's secrets. Closing one path is not enough both must be addressed
