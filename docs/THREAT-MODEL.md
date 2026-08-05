@@ -16,6 +16,12 @@ and PASTA to connect those threats to real attack scenarios and mitigations.
 
 ---
 
+> **Scope of this document:** this iteration of the threat model covers only
+> the secrets management surface of Newolf (API, storage, and identity/access
+> control around secrets). Newolf's full scope is broader — see
+> `PROJECT-CHARTER.md`. This document will expand as new components are
+> threat-modeled.
+
 ## 1. STRIDE
 
 I applied STRIDE to map the six threat categories against Newolf's core design
